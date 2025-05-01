@@ -19,6 +19,10 @@
 /* Smooth Scroll Behavior */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Animations */
@@ -46,6 +50,7 @@ html {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(229, 231, 235, 0.5);
+    transform: perspective(1000px) rotateX(0) rotateY(0);
 }
 
 .dark .bio-card {
@@ -54,7 +59,7 @@ html {
 }
 
 .bio-card:hover {
-    transform: translateY(-2px);
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
@@ -159,9 +164,21 @@ input:hover, select:hover {
 }
 
 .hero-gradient {
-    background: linear-gradient(-45deg, #3b82f6, #60a5fa, #93c5fd);
-    background-size: 200% 200%;
+    background: linear-gradient(135deg, 
+        rgba(59, 130, 246, 0.1), 
+        rgba(147, 197, 253, 0.1),
+        rgba(196, 181, 253, 0.1)
+    );
+    background-size: 400% 400%;
     animation: gradientFlow 15s ease infinite;
+}
+
+.dark .hero-gradient {
+    background: linear-gradient(135deg,
+        rgba(59, 130, 246, 0.05),
+        rgba(147, 197, 253, 0.05),
+        rgba(196, 181, 253, 0.05)
+    );
 }
 
 /* Additional Styles */
@@ -193,4 +210,250 @@ input:hover, select:hover {
 
 .dark #bioForm {
     border-color: rgba(75, 85, 99, 0.2);
+}
+
+/* Hero Section Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float-delayed {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float-delayed 5s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.animation-delay-200 {
+    animation-delay: 200ms;
+}
+
+/* Shadow utilities */
+.shadow-blue {
+    box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.2);
+}
+
+.dark .shadow-blue {
+    box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.1);
+}
+
+/* Improved button styles */
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    transform: translateY(-2px);
+}
+
+/* Text gradient effect */
+.text-gradient {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Improved focus styles */
+:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Pattern background */
+.pattern-grid {
+    background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.dark .pattern-grid {
+    background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+}
+
+/* Base Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* Bio Generator Styles */
+.platform-btn {
+    @apply flex flex-col items-center justify-center p-4 rounded-xl bg-gray-50 dark:bg-gray-900 
+           border-2 border-transparent hover:border-blue-500 transition-all duration-200
+           text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400;
+}
+
+.platform-btn.active {
+    @apply border-blue-500 bg-blue-50 dark:bg-blue-900/50 
+           text-blue-600 dark:text-blue-400;
+}
+
+.form-input {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 
+           bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           transition-colors duration-200;
+}
+
+.form-select {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 
+           bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           transition-colors duration-200;
+}
+
+/* Animations */
+@keyframes copy-success {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.copy-success {
+    animation: copy-success 0.3s ease-in-out;
+}
+
+/* Spacing Utilities */
+.space-y-6 > * + * {
+    margin-top: 1.5rem;
+}
+
+.space-y-8 > * + * {
+    margin-top: 2rem;
+}
+
+/* Typography Utilities */
+.tracking-tight {
+    letter-spacing: -0.01em;
+}
+
+.leading-relaxed {
+    line-height: 1.625;
+}
+
+/* Dark Mode Transitions */
+.dark-mode-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+    .text-4xl {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    
+    .text-3xl {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+    }
+    
+    .text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    
+    .text-xl {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+    
+    .text-lg {
+        font-size: 1.125rem;
+        line-height: 1.625rem;
+    }
+}
+
+/* Section Spacing */
+section {
+    @apply py-16;
+}
+
+/* Card Styles */
+.card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-200;
+}
+
+.card:hover {
+    @apply shadow-xl transform -translate-y-1;
+}
+
+/* Button Styles */
+.btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
+           transition-all duration-200 tracking-tight;
+}
+
+.btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+    @apply bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600;
+}
+
+/* Form Styles */
+.form-label {
+    @apply block text-gray-700 dark:text-gray-200 font-medium mb-2 tracking-tight;
+}
+
+.form-help {
+    @apply text-sm text-gray-500 dark:text-gray-400 mt-1 tracking-tight;
+}
+
+/* Container Styles */
+.container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Grid Styles */
+.grid {
+    @apply grid gap-6;
+}
+
+@media (min-width: 640px) {
+    .grid {
+        @apply gap-8;
+    }
+}
+
+/* Utility Classes */
+.text-balance {
+    text-wrap: balance;
+}
+
+.text-pretty {
+    text-wrap: pretty;
+}
+
+/* Focus Styles */
+:focus-visible {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Selection Styles */
+::selection {
+    @apply bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100;
 } 
